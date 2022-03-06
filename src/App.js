@@ -43,14 +43,20 @@ function App() {
 
 function SignIn() {
 
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  }
+  const auth = getAuth();
+signInAnonymously(auth)
+  .then(() => {
+    // Signed in..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ...
+  });
 
   return (
     <>
-      <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
+      <button className="sign-in" onClick={signInAnonymously}>Sign in with Google</button>
       <p>Do not violate the community guidelines or you will be banned for life!</p>
     </>
   )
